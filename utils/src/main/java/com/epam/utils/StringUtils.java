@@ -2,9 +2,15 @@ package com.epam.utils;
 
 public class StringUtils {
     public static boolean isPositiveNumber(String str) {
-        return isNumeric(str) && Double.parseDouble(str) > 0;
-    }
-    private static boolean isNumeric(String str) {
-        return str != null && str.matches("-?\\d+(\\.\\d+)?");
+        if (str == null || str.trim().isEmpty()) {
+            return false;
+        }
+
+        try {
+            double number = Double.parseDouble(str.trim());
+            return number > 0;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }
